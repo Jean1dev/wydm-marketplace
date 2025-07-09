@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 
 const products = [
@@ -5,7 +7,7 @@ const products = [
     id: 1,
     name: "Saleor Dash Shoes",
     price: "$54.00 - $90.00",
-    image: "/next.svg",
+    image: "/images/dimas.png",
     seller: "ACME",
     sellerRating: 4.5,
   },
@@ -13,7 +15,7 @@ const products = [
     id: 2,
     name: "Saleor Card 50",
     price: "$50.00",
-    image: "/vercel.svg",
+    image: "/images/dimas.png",
     seller: "ACME",
     sellerRating: 5,
   },
@@ -21,7 +23,7 @@ const products = [
     id: 3,
     name: "Saleor Grey Hoodie",
     price: "$18.00",
-    image: "/file.svg",
+    image: "/images/dimas.png",
     seller: "ACME",
     sellerRating: 4,
   },
@@ -29,7 +31,7 @@ const products = [
     id: 4,
     name: "Saleor Mug",
     price: "$12.00",
-    image: "/globe.svg",
+    image: "/images/dimas.png",
     seller: "ACME",
     sellerRating: 4.2,
   },
@@ -37,7 +39,7 @@ const products = [
     id: 5,
     name: "Saleor Sunglasses",
     price: "$22.00",
-    image: "/window.svg",
+    image: "/images/dimas.png",
     seller: "ACME",
     sellerRating: 4.8,
   },
@@ -45,7 +47,7 @@ const products = [
     id: 6,
     name: "Saleor Beanie",
     price: "$10.00",
-    image: "/next.svg",
+    image: "/images/dimas.png",
     seller: "ACME",
     sellerRating: 4.1,
   },
@@ -76,35 +78,20 @@ function StarRating({ rating }: { rating: number }) {
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-white flex flex-col">
-      <header className="w-full border-b border-gray-100 py-6 px-4 flex items-center justify-between bg-white">
-        <span className="font-bold text-xl tracking-tight text-gray-900">WYDM</span>
-        <div className="flex items-center gap-4">
-          <div className="relative">
-            <input type="text" placeholder="Search for products..." className="rounded-md border border-gray-200 px-3 py-2 text-sm w-48 focus:outline-none focus:ring-2 focus:ring-black/10 text-gray-900 placeholder-gray-400" />
-            <svg className="absolute right-2 top-2 w-4 h-4 text-gray-400" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          </div>
-          <button className="text-gray-700 hover:text-black">
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><circle cx="12" cy="7" r="4"/><path d="M5.5 21a7.5 7.5 0 0 1 13 0"/></svg>
-          </button>
-          <button className="text-gray-700 hover:text-black">
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M6 6h15l-1.5 9h-13z"/><circle cx="9" cy="21" r="1"/><circle cx="19" cy="21" r="1"/></svg>
-          </button>
-        </div>
-      </header>
+    <div className="min-h-screen bg-white dark:bg-neutral-900 flex flex-col">
       <main className="flex-1 w-full max-w-7xl mx-auto px-4 py-10">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
           {products.map((product) => (
-            <div key={product.id} className="bg-white rounded-lg shadow-sm border border-gray-100 flex flex-col p-4 hover:shadow-md transition-shadow">
-              <div className="w-full aspect-square flex items-center justify-center mb-4 bg-gray-50 rounded">
+            <div key={product.id} className="bg-white dark:bg-neutral-900 rounded-lg shadow-sm border border-gray-100 dark:border-neutral-800 flex flex-col p-4 hover:shadow-md transition-shadow">
+              <div className="w-full aspect-square flex items-center justify-center mb-4 bg-gray-50 dark:bg-neutral-800 rounded">
                 <Image src={product.image} alt={product.name} width={220} height={220} className="object-contain max-h-40" />
               </div>
               <div className="flex-1 flex flex-col gap-1">
-                <span className="font-semibold text-base text-gray-900 leading-tight">{product.name}</span>
-                <span className="text-gray-700 text-sm font-medium">{product.price}</span>
+                <span className="font-semibold text-base text-gray-900 dark:text-gray-100 leading-tight">{product.name}</span>
+                <span className="text-gray-700 dark:text-gray-300 text-sm font-medium">{product.price}</span>
                 <div className="flex items-center gap-2 mt-2">
                   <StarRating rating={product.sellerRating} />
-                  <span className="text-xs text-gray-500">{product.seller}</span>
+                  <span className="text-xs text-gray-500 dark:text-gray-400">{product.seller}</span>
                 </div>
               </div>
             </div>
