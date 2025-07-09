@@ -138,7 +138,7 @@ export default function Home() {
               onClick={() => handleProductClick(product.id)}
             >
               <div className="w-full aspect-square flex items-center justify-center mb-4 bg-gray-50 dark:bg-neutral-800 rounded">
-                <Image src="/images/dimas.png" alt={product.name} width={220} height={220} className="object-contain max-h-40" />
+                <Image src="/dimas.png" alt={product.name} width={220} height={220} className="object-contain max-h-40" />
               </div>
               <div className="flex-1 flex flex-col gap-1">
                 <span className="font-semibold text-base text-gray-900 dark:text-gray-100 leading-tight">{product.name}</span>

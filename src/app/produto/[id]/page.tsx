@@ -150,7 +150,7 @@ export default function ProductDetailPage() {
           {/* Imagem do Produto */}
           <div className="bg-gray-50 dark:bg-neutral-800 rounded-lg p-8 flex items-center justify-center">
             <Image
-              src="/images/dimas.png"
+              src="/dimas.png"
               alt={product.name}
               width={400}
               height={400}
