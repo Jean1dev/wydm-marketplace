@@ -45,8 +45,8 @@ export default function AnunciarPage() {
 
       const result = await response.json();
       
-      // Redirecionar para a página inicial após sucesso
-      router.push('/');
+      // Redirecionar para a página de contatos após sucesso
+      router.push('/meus-contatos');
       
     } catch (error) {
       console.error('❌ Erro ao anunciar produto:', error);

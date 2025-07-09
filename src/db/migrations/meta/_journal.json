@@ -15,6 +15,13 @@
       "when": 1752069620305,
       "tag": "0001_rich_gorilla_man",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1752080177152,
+      "tag": "0002_thin_gateway",
+      "breakpoints": true
     }
   ]
 }
