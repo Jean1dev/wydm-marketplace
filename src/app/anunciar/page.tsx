@@ -27,7 +27,6 @@ export default function AnunciarPage() {
                 amount: parseFloat(formData.get('amount') as string),
                 quantity: parseInt(formData.get('quantity') as string),
                 description: formData.get('description') as string,
-                sellerName: session.user.name || 'Usuário',
             };
 
             const response = await fetch('/api/announce', {

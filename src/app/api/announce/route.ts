@@ -17,13 +17,13 @@ function validateRequestData(body: unknown) {
     throw new Error('Invalid request body');
   }
   
-  const { name, category, amount, quantity, description, sellerName, sellerFk } = body as Record<string, unknown>;
+  const { name, category, amount, quantity, description } = body as Record<string, unknown>;
   
-  if (!name || !category || !amount || !sellerName || !sellerFk) {
+  if (!name || !category || !amount) {
     throw new Error('Missing required fields');
   }
   
-  return { name, category, amount, quantity, description, sellerName, sellerFk };
+  return { name, category, amount, quantity, description };
 }
 
 async function findOrCreateSeller(email: string, userName: string) {
