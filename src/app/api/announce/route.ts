@@ -35,7 +35,7 @@ async function findOrCreateSeller(email: string, userName: string) {
 
   await db.insert(seller).values({
     name: email,
-    wydNickname: userName || 'Usuário',
+    wydNickname: userName,
     totalSells: 0,
     totalReviews: 0,
     reputation: 0,
@@ -81,7 +81,7 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const productData = validateRequestData(body);
 
-    const seller = await findOrCreateSeller(email, session.user.name || 'Usuário');
+    const seller = await findOrCreateSeller(email, session.user.name || 'NoNickname');
 
     const newProduct = await createProduct(productData, seller);
 

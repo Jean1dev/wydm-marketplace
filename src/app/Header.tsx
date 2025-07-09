@@ -12,9 +12,18 @@ export default function Header() {
     router.push('/anunciar');
   };
 
+  const handleLogoClick = () => {
+    router.push('/');
+  };
+
   return (
     <header className="w-full border-b border-gray-100 dark:border-neutral-800 py-4 px-4 flex items-center justify-between bg-white dark:bg-neutral-900">
-      <span className="font-bold text-xl tracking-tight text-gray-900 dark:text-gray-100">WYDM</span>
+      <span 
+        onClick={handleLogoClick}
+        className="font-bold text-xl tracking-tight text-gray-900 dark:text-gray-100 cursor-pointer hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+      >
+        WYDM
+      </span>
       
       <div className="flex items-center gap-2 sm:gap-4">
         {/* Barra de pesquisa - oculta em mobile muito pequeno */}

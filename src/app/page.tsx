@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 type Product = {
   id: number;
@@ -67,6 +68,7 @@ export default function Home() {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const router = useRouter();
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -87,6 +89,10 @@ export default function Home() {
 
     fetchProducts();
   }, []);
+
+  const handleProductClick = (productId: number) => {
+    router.push(`/produto/${productId}`);
+  };
 
   if (loading) {
     return (
@@ -126,7 +132,11 @@ export default function Home() {
       <main className="flex-1 w-full max-w-7xl mx-auto px-4 py-10">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
           {products.map((product) => (
-            <div key={product.id} className="bg-white dark:bg-neutral-900 rounded-lg shadow-sm border border-gray-100 dark:border-neutral-800 flex flex-col p-4 hover:shadow-md transition-shadow">
+            <div 
+              key={product.id} 
+              className="bg-white dark:bg-neutral-900 rounded-lg shadow-sm border border-gray-100 dark:border-neutral-800 flex flex-col p-4 hover:shadow-md transition-shadow cursor-pointer"
+              onClick={() => handleProductClick(product.id)}
+            >
               <div className="w-full aspect-square flex items-center justify-center mb-4 bg-gray-50 dark:bg-neutral-800 rounded">
                 <Image src="/images/dimas.png" alt={product.name} width={220} height={220} className="object-contain max-h-40" />
               </div>
