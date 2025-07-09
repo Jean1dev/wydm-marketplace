@@ -78,15 +78,10 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-white flex flex-col">
       <header className="w-full border-b border-gray-100 py-6 px-4 flex items-center justify-between bg-white">
-        <span className="font-bold text-xl tracking-tight">ACME</span>
-        <nav className="hidden md:flex gap-6 text-gray-700 text-sm font-medium">
-          <a href="#" className="hover:text-black">All</a>
-          <a href="#" className="hover:text-black">Apparel</a>
-          <a href="#" className="hover:text-black">Accessories</a>
-        </nav>
+        <span className="font-bold text-xl tracking-tight text-gray-900">WYDM</span>
         <div className="flex items-center gap-4">
           <div className="relative">
-            <input type="text" placeholder="Search for products..." className="rounded-md border border-gray-200 px-3 py-2 text-sm w-48 focus:outline-none focus:ring-2 focus:ring-black/10" />
+            <input type="text" placeholder="Search for products..." className="rounded-md border border-gray-200 px-3 py-2 text-sm w-48 focus:outline-none focus:ring-2 focus:ring-black/10 text-gray-900 placeholder-gray-400" />
             <svg className="absolute right-2 top-2 w-4 h-4 text-gray-400" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
           </div>
           <button className="text-gray-700 hover:text-black">
