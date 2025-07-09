@@ -1,57 +1,44 @@
 "use client";
 
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
-const products = [
-  {
-    id: 1,
-    name: "Saleor Dash Shoes",
-    price: "$54.00 - $90.00",
-    image: "/images/dimas.png",
-    seller: "ACME",
-    sellerRating: 4.5,
-  },
-  {
-    id: 2,
-    name: "Saleor Card 50",
-    price: "$50.00",
-    image: "/images/dimas.png",
-    seller: "ACME",
-    sellerRating: 5,
-  },
-  {
-    id: 3,
-    name: "Saleor Grey Hoodie",
-    price: "$18.00",
-    image: "/images/dimas.png",
-    seller: "ACME",
-    sellerRating: 4,
-  },
-  {
-    id: 4,
-    name: "Saleor Mug",
-    price: "$12.00",
-    image: "/images/dimas.png",
-    seller: "ACME",
-    sellerRating: 4.2,
-  },
-  {
-    id: 5,
-    name: "Saleor Sunglasses",
-    price: "$22.00",
-    image: "/images/dimas.png",
-    seller: "ACME",
-    sellerRating: 4.8,
-  },
-  {
-    id: 6,
-    name: "Saleor Beanie",
-    price: "$10.00",
-    image: "/images/dimas.png",
-    seller: "ACME",
-    sellerRating: 4.1,
-  },
-];
+type Product = {
+  id: number;
+  name: string;
+  amount: string;
+  sellerName: string;
+  sellerReputation: number;
+  createdAt: string;
+  updatedAt: string;
+};
+
+function LoadingSpinner() {
+  return (
+    <div className="flex justify-center items-center min-h-[400px]">
+      <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+    </div>
+  );
+}
+
+function EmptyState() {
+  return (
+    <div className="flex flex-col items-center justify-center min-h-[400px] text-center">
+      <div className="w-24 h-24 bg-gray-100 dark:bg-neutral-800 rounded-full flex items-center justify-center mb-4">
+        <svg className="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+        </svg>
+      </div>
+      <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">
+        Nenhum produto encontrado
+      </h3>
+      <p className="text-gray-500 dark:text-gray-400 max-w-md">
+        Ainda não temos produtos cadastrados no marketplace. 
+        Volte em breve para ver as novidades!
+      </p>
+    </div>
+  );
+}
 
 function StarRating({ rating }: { rating: number }) {
   const fullStars = Math.floor(rating);
@@ -77,6 +64,63 @@ function StarRating({ rating }: { rating: number }) {
 }
 
 export default function Home() {
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch('/api/products');
+        if (!response.ok) {
+          throw new Error('Failed to fetch products');
+        }
+        const data = await response.json();
+        setProducts(data);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'An error occurred');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-white dark:bg-neutral-900 flex flex-col">
+        <main className="flex-1 w-full max-w-7xl mx-auto px-4 py-10">
+          <LoadingSpinner />
+        </main>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen bg-white dark:bg-neutral-900 flex flex-col">
+        <main className="flex-1 w-full max-w-7xl mx-auto px-4 py-10">
+          <div className="text-center text-red-600 dark:text-red-400">
+            <h2 className="text-xl font-semibold mb-2">Error</h2>
+            <p>{error}</p>
+          </div>
+        </main>
+      </div>
+    );
+  }
+
+  if (products.length === 0) {
+    return (
+      <div className="min-h-screen bg-white dark:bg-neutral-900 flex flex-col">
+        <main className="flex-1 w-full max-w-7xl mx-auto px-4 py-10">
+          <EmptyState />
+        </main>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-white dark:bg-neutral-900 flex flex-col">
       <main className="flex-1 w-full max-w-7xl mx-auto px-4 py-10">
@@ -84,14 +128,14 @@ export default function Home() {
           {products.map((product) => (
             <div key={product.id} className="bg-white dark:bg-neutral-900 rounded-lg shadow-sm border border-gray-100 dark:border-neutral-800 flex flex-col p-4 hover:shadow-md transition-shadow">
               <div className="w-full aspect-square flex items-center justify-center mb-4 bg-gray-50 dark:bg-neutral-800 rounded">
-                <Image src={product.image} alt={product.name} width={220} height={220} className="object-contain max-h-40" />
+                <Image src="/images/dimas.png" alt={product.name} width={220} height={220} className="object-contain max-h-40" />
               </div>
               <div className="flex-1 flex flex-col gap-1">
                 <span className="font-semibold text-base text-gray-900 dark:text-gray-100 leading-tight">{product.name}</span>
-                <span className="text-gray-700 dark:text-gray-300 text-sm font-medium">{product.price}</span>
+                <span className="text-gray-700 dark:text-gray-300 text-sm font-medium">${product.amount}</span>
                 <div className="flex items-center gap-2 mt-2">
-                  <StarRating rating={product.sellerRating} />
-                  <span className="text-xs text-gray-500 dark:text-gray-400">{product.seller}</span>
+                  <StarRating rating={product.sellerReputation} />
+                  <span className="text-xs text-gray-500 dark:text-gray-400">{product.sellerName}</span>
                 </div>
               </div>
             </div>
