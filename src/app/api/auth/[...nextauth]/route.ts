@@ -1,4 +1,4 @@
-import NextAuth from 'next-auth';
+import NextAuth from 'next-auth/next';
 import GoogleProvider from 'next-auth/providers/google';
 
 const handler = NextAuth({
@@ -12,10 +12,7 @@ const handler = NextAuth({
     strategy: 'jwt',
   },
   callbacks: {
-    async session({ session, token }) {
-      if (token.sub && session.user) {
-        session.user.id = token.sub;
-      }
+    async session({ session }) {
       return session;
     },
     async jwt({ token, user }) {

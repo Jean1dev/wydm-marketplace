@@ -19,15 +19,9 @@ const restoreSettings = () => {
     return value;
 };
 
-const deleteSettings = () => {
-    try {
-        window.localStorage.removeItem(STORAGE_KEY);
-    } catch (err) {
-        console.error(err);
-    }
-};
 
-const storeSettings = (value: any) => {
+
+const storeSettings = (value: Record<string, unknown>) => {
     try {
         window.localStorage.setItem(STORAGE_KEY, JSON.stringify(value));
     } catch (err) {
@@ -45,10 +39,10 @@ export const SettingsProvider = ({ children }: { children: React.ReactNode }) =>
             return
         }
 
-        setSettings({ ...settings, isInitialized: true })
+        setSettings(prev => ({ ...prev, isInitialized: true }))
     }, []);
 
-    const handleUpdate = (update: any) => {
+    const handleUpdate = (update: Record<string, unknown>) => {
         const newSettings = { ...settings, ...update };
         setSettings(newSettings);
         storeSettings(newSettings);

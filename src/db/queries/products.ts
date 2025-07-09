@@ -10,7 +10,7 @@ export async function getAllProducts() {
       .orderBy(desc(products.createdAt));
     
     return allProducts;
-  } catch (error) {
+  } catch {
     throw new Error('Failed to fetch products');
   }
 } 

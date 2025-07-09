@@ -31,7 +31,7 @@ export default function MeusContatosPage() {
     if (isAuthenticated && session?.user?.email) {
       fetchContacts();
     }
-  }, [isAuthenticated, isLoading, session]);
+  }, [isAuthenticated, isLoading, session, router]);
 
   const fetchContacts = async () => {
     try {

@@ -4,10 +4,15 @@ export const defaultSettings = {
   theme: 'light',
 }
 
-export const initialState = {
+type SettingsState = typeof defaultSettings & {
+  isInitialized: boolean;
+  handleUpdate: (update: Record<string, unknown>) => void;
+};
+
+export const initialState: SettingsState = {
   ...defaultSettings,
   isInitialized: false,
-  handleUpdate: (_: any) => {},
+  handleUpdate: () => {},
 }
 
-export const SettingsContext = createContext(initialState);
+export const SettingsContext = createContext<SettingsState>(initialState);
