@@ -43,6 +43,7 @@ CREATE TABLE `interacoes` (
 CREATE TABLE `usuarios` (
 	`id` int AUTO_INCREMENT NOT NULL,
 	`email_plataforma_crypto` varchar(255),
+	`email_provedor_externo` varchar(255),
 	`id_provedor_oauth` varchar(255),
 	`nome` varchar(255) NOT NULL,
 	`avatar` varchar(500),

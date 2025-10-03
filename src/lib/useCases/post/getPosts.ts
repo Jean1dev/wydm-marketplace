@@ -1,5 +1,5 @@
 import { db } from '@/db';
-import { posts, usuarios, categories } from '@/db/schema';
+import { posts, categories } from '@/db/schema';
 import { desc, eq, and } from 'drizzle-orm';
 
 export interface GetPostsRequest {

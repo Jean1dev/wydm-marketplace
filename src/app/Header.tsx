@@ -9,7 +9,7 @@ export default function Header() {
   const router = useRouter();
 
   const handleCriarPublicacaoClick = () => {
-    router.push('/criar-post');
+    router.push('/forum/new');
   };
 
   const handleLogoClick = () => {

@@ -22,6 +22,7 @@ interface UsePostsResult {
   loading: boolean;
   error: string | null;
   refetch: () => void;
+  addPost: (post: Post) => void;
 }
 
 export const usePosts = (categoryId?: number | 'all'): UsePostsResult => {
@@ -58,12 +59,17 @@ export const usePosts = (categoryId?: number | 'all'): UsePostsResult => {
 
   useEffect(() => {
     fetchPosts();
-  }, [categoryId]);
+  }, [categoryId]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const addPost = (post: Post) => {
+    setPosts(prev => [post, ...prev]);
+  };
 
   return {
     posts,
     loading,
     error,
     refetch: fetchPosts,
+    addPost,
   };
 };

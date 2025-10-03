@@ -9,7 +9,7 @@ export interface GetUserByOAuthIdResponse {
   user?: {
     id: number;
     nome: string;
-    emailPlataformaCrypto?: string;
+    emailProvedorExterno?: string;
     avatar?: string;
     dataCriacao: Date;
     dataUltimaVisita?: Date;
@@ -40,7 +40,7 @@ export async function getUserByOAuthId(request: GetUserByOAuthIdRequest): Promis
       user: {
         id: user.id,
         nome: user.nome,
-        emailPlataformaCrypto: user.emailPlataformaCrypto || undefined,
+        emailProvedorExterno: user.emailProvedorExterno || undefined,
         avatar: user.avatar || undefined,
         dataCriacao: user.dataCriacao,
         dataUltimaVisita: user.dataUltimaVisita || undefined

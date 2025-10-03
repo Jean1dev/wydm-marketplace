@@ -1,6 +1,6 @@
 import NextAuth from 'next-auth/next';
 import GoogleProvider from 'next-auth/providers/google';
-import { authenticateUser, getUserByOAuthId, updateUserLastVisit } from '@/lib/useCases/user';
+import { authenticateUser, updateUserLastVisit } from '@/lib/useCases/user';
 
 const handler = NextAuth({
   providers: [
@@ -13,10 +13,10 @@ const handler = NextAuth({
     strategy: 'jwt',
   },
   callbacks: {
-    async signIn({ user, account }) {
+    async signIn({ user }) {
       try {
         const result = await authenticateUser({
-          id: user.id || '',
+          id: user.id,
           name: user.name,
           email: user.email,
           image: user.image
@@ -33,10 +33,23 @@ const handler = NextAuth({
         return false;
       }
     },
-    async session({ session, token }) {
+    async session({ session }) {
       return session;
     },
     async jwt({ token, user }) {
+      if (user) {
+        const result = await authenticateUser({
+          id: user.id,
+          name: user.name,
+          email: user.email,
+          image: user.image
+        });
+
+        if (result.success && result.user) {
+          token.dbId = result.user.id;
+        }
+      }
+
       if (token.sub) {
         await updateUserLastVisit({ oauthId: token.sub });
       }

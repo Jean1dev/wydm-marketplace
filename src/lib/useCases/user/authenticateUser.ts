@@ -12,7 +12,7 @@ export interface AuthenticateUserResponse {
     user?: {
         id: number;
         nome: string;
-        emailPlataformaCrypto?: string;
+        emailProvedorExterno?: string;
     };
     isNewUser?: boolean;
     error?: string;
@@ -35,7 +35,7 @@ export async function authenticateUser(request: AuthenticateUserRequest): Promis
                 user: {
                     id: existingUser.id,
                     nome: existingUser.nome,
-                    emailPlataformaCrypto: existingUser.emailPlataformaCrypto || undefined
+                    emailProvedorExterno: existingUser.emailProvedorExterno || undefined
                 },
                 isNewUser: false
             };
@@ -45,7 +45,7 @@ export async function authenticateUser(request: AuthenticateUserRequest): Promis
             idProvedorOAuth: request.id,
             nome: request.name || 'Usuário',
             avatar: request.image || undefined,
-            emailPlataformaCrypto: request.email || undefined
+            emailProvedorExterno: request.email || undefined
         });
 
         return {
@@ -53,7 +53,7 @@ export async function authenticateUser(request: AuthenticateUserRequest): Promis
             user: {
                 id: newUser.id,
                 nome: newUser.nome,
-                emailPlataformaCrypto: newUser.emailPlataformaCrypto || undefined
+                emailProvedorExterno: newUser.emailProvedorExterno || undefined
             },
             isNewUser: true
         };

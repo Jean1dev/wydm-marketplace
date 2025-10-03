@@ -6,12 +6,12 @@ export interface CreateUserData {
   idProvedorOAuth: string;
   nome: string;
   avatar?: string;
-  emailPlataformaCrypto?: string;
+  emailProvedorExterno?: string;
 }
 
 export interface UserRecord {
   id: number;
-  emailPlataformaCrypto: string | null;
+  emailProvedorExterno: string | null;
   idProvedorOAuth: string | null;
   nome: string;
   avatar: string | null;
@@ -33,6 +33,16 @@ export async function findUserByOAuthId(idProvedorOAuth: string): Promise<UserRe
   return user[0] || null;
 }
 
+export async function findUserByEmail(email: string): Promise<UserRecord | null> {
+  const user = await db
+    .select()
+    .from(usuarios)
+    .where(eq(usuarios.emailProvedorExterno, email))
+    .limit(1);
+  
+  return user[0] || null;
+}
+
 export async function createUser(userData: CreateUserData): Promise<UserRecord> {
   const [insertResult] = await db
     .insert(usuarios)
@@ -40,7 +50,7 @@ export async function createUser(userData: CreateUserData): Promise<UserRecord> 
       idProvedorOAuth: userData.idProvedorOAuth,
       nome: userData.nome,
       avatar: userData.avatar,
-      emailPlataformaCrypto: userData.emailPlataformaCrypto,
+      emailProvedorExterno: userData.emailProvedorExterno,
       dataCriacao: new Date(),
       dataUltimaVisita: new Date(),
     });

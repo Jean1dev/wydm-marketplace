@@ -2,8 +2,8 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { getAllCategories, getCategoryById, type Category } from '@/lib/categories';
-import { usePosts, type Post } from '@/hooks/usePosts';
+import { getAllCategories, getCategoryById } from '@/lib/categories';
+import { usePosts } from '@/hooks/usePosts';
 
 export default function Forum() {
   const [selectedCategory, setSelectedCategory] = useState<number | 'all'>('all');
@@ -89,9 +89,11 @@ export default function Forum() {
                 Posts {selectedCategory !== 'all' && `- ${getCategoryById(selectedCategory)?.titulo}`}
               </h2>
               <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
-                <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md font-medium transition-colors">
-                  + Criar Novo Post
-                </button>
+                <Link href="/forum/new">
+                  <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md font-medium transition-colors">
+                    + Criar Novo Post
+                  </button>
+                </Link>
               </div>
             </div>
 
