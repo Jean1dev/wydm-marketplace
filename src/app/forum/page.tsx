@@ -124,10 +124,8 @@ export default function Forum() {
             {!loading && !error && (
               <div className="space-y-4">
                 {posts.map((post) => (
-                  <div
-                    key={post.id}
-                    className="bg-white dark:bg-neutral-800 rounded-lg p-6 border border-gray-200 dark:border-neutral-700 hover:shadow-md transition-shadow cursor-pointer"
-                  >
+                  <div key={post.id} className="bg-white dark:bg-neutral-800 rounded-lg border border-gray-200 dark:border-neutral-700 hover:shadow-md transition-shadow">
+                    <Link href={`/forum/${post.id}`} className="block p-6">
                     <div className="flex items-start justify-between mb-3">
                       <div className="flex items-center space-x-2">
                         <span className="text-lg">
@@ -171,10 +169,11 @@ export default function Forum() {
                       <div className="flex items-center space-x-4 text-sm text-gray-500 dark:text-gray-400">
                         <div className="flex items-center space-x-1">
                           <span>📅</span>
-                          <span>{formatDate(post.dataCriacao)}</span>
+                          <span>Última atualização: {formatDate(post.dataAtualizacao || post.dataCriacao)}</span>
                         </div>
                       </div>
                     </div>
+                    </Link>
                   </div>
                 ))}
                 

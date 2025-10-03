@@ -64,7 +64,7 @@ export async function getPosts(request: GetPostsRequest = {}): Promise<GetPostsR
       .from(posts)
       .leftJoin(categories, eq(posts.categoriaId, categories.id))
       .where(and(...whereConditions))
-      .orderBy(desc(posts.dataCriacao))
+      .orderBy(desc(posts.dataAtualizacao))
       .limit(limit);
 
     const postsData = await query;

@@ -67,6 +67,7 @@ const preparePostData = (request: CreatePostRequest, autorId: number, autorNome:
     descricao: descricao.trim(),
     descricaoTruncada: createTruncatedDescription(descricao),
     dataCriacao: new Date(),
+    dataAtualizacao: new Date(),
     estaBloqueado: false,
     estaVisivel: true,
     autorId,
