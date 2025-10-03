@@ -1,7 +1,7 @@
 import { db } from '@/db';
 import { posts } from '@/db/schema';
 import { getCategoryById } from '@/lib/categories';
-import { getAuthorByEmail } from '@/lib/useCases/user';
+import { getAuthorByEmail, updateUserInteractions } from '@/lib/useCases/user';
 
 export interface CreatePostRequest {
   titulo: string;
@@ -109,6 +109,11 @@ export const createPost = async (request: CreatePostRequest): Promise<CreatePost
     const { id: autorId, nome: autorNome, avatar: autorAvatar } = authorResult.data!;
     const postData = preparePostData(request, autorId, autorNome, autorAvatar || null);
     await insertPost(postData);
+
+    const updateResult = await updateUserInteractions({ userId: autorId });
+    if (!updateResult.success) {
+      console.warn('Erro ao atualizar interações do usuário:', updateResult.error);
+    }
 
     return createSuccessResponse();
 

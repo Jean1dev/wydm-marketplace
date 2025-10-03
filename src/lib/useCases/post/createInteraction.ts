@@ -1,7 +1,7 @@
 import { db } from '@/db';
 import { interacoes } from '@/db/schema';
 import { eq } from 'drizzle-orm';
-import { getAuthorByEmail } from '@/lib/useCases/user';
+import { getAuthorByEmail, updateUserInteractions } from '@/lib/useCases/user';
 import { updatePostDate } from './updatePostDate';
 
 export interface CreateInteractionRequest {
@@ -119,6 +119,11 @@ export const createInteraction = async (request: CreateInteractionRequest): Prom
     const updateResult = await updatePostDate({ postId: request.postId });
     if (!updateResult.success) {
       console.warn('Erro ao atualizar data do post:', updateResult.error);
+    }
+
+    const userUpdateResult = await updateUserInteractions({ userId: autorId });
+    if (!userUpdateResult.success) {
+      console.warn('Erro ao atualizar interações do usuário:', userUpdateResult.error);
     }
 
     return createSuccessResponse(formattedData);
