@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { initialState, SettingsContext } from "./settings-context";
 
-const STORAGE_KEY = 'settings.wydm.marketplace';
+const STORAGE_KEY = 'settings.comunidade.crypto';
 
 const restoreSettings = () => {
     let value = null;

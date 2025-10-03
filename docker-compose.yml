@@ -3,12 +3,12 @@ version: '3.8'
 services:
   mysql:
     image: mysql:8.0
-    container_name: wydm-mysql2
+    container_name: comunidade
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: wydm_marketplace2
-      MYSQL_USER: wydm_user
-      MYSQL_PASSWORD: wydm_password
+      MYSQL_DATABASE: comunidade
+      MYSQL_USER: comunidade_user
+      MYSQL_PASSWORD: comunidade_passwd
     ports:
       - "3306:3306"
     command: --default-authentication-plugin=mysql_native_password
