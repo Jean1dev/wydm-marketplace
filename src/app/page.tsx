@@ -1,6 +1,7 @@
 "use client";
 
 import { useAuth } from '@/hooks/useAuth';
+import Link from 'next/link';
 
 export default function Home() {
   const { isAuthenticated, isLoading } = useAuth();
@@ -29,66 +30,19 @@ export default function Home() {
             arbitragens, sugestões e muito mais sobre o mundo das criptomoedas.
           </p>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl mx-auto">
-            <div className="bg-white dark:bg-neutral-800 rounded-lg p-6 border border-gray-200 dark:border-neutral-700">
-              <div className="text-3xl mb-3">📝</div>
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">
-                Release Notes
-              </h3>
-              <p className="text-gray-600 dark:text-gray-400 text-sm">
-                Acompanhe as últimas atualizações e novidades da plataforma.
-              </p>
-            </div>
-
-            <div className="bg-white dark:bg-neutral-800 rounded-lg p-6 border border-gray-200 dark:border-neutral-700">
-              <div className="text-3xl mb-3">🎯</div>
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">
-                Estratégias
-              </h3>
-              <p className="text-gray-600 dark:text-gray-400 text-sm">
-                Compartilhe e discuta estratégias de investimento em crypto.
-              </p>
-            </div>
-
-            <div className="bg-white dark:bg-neutral-800 rounded-lg p-6 border border-gray-200 dark:border-neutral-700">
-              <div className="text-3xl mb-3">⚖️</div>
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">
-                Arbitragens
-              </h3>
-              <p className="text-gray-600 dark:text-gray-400 text-sm">
-                Identifique oportunidades de arbitragem entre exchanges.
-              </p>
-            </div>
-
-            <div className="bg-white dark:bg-neutral-800 rounded-lg p-6 border border-gray-200 dark:border-neutral-700">
-              <div className="text-3xl mb-3">💡</div>
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">
-                Sugestões
-              </h3>
-              <p className="text-gray-600 dark:text-gray-400 text-sm">
-                Proponha melhorias para a plataforma e comunidade.
-              </p>
-            </div>
-
-            <div className="bg-white dark:bg-neutral-800 rounded-lg p-6 border border-gray-200 dark:border-neutral-700">
-              <div className="text-3xl mb-3">🔍</div>
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">
-                Críticas
-              </h3>
-              <p className="text-gray-600 dark:text-gray-400 text-sm">
-                Analise e critique projetos e estratégias de forma construtiva.
-              </p>
-            </div>
-
-            <div className="bg-white dark:bg-neutral-800 rounded-lg p-6 border border-gray-200 dark:border-neutral-700">
-              <div className="text-3xl mb-3">💥</div>
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">
-                Lasque o Pau
-              </h3>
-              <p className="text-gray-600 dark:text-gray-400 text-sm">
-                Espaço para discussões mais diretas e controversas.
-              </p>
-            </div>
+          <div className="flex justify-center">
+            <Link href="/forum">
+              <div className="bg-white dark:bg-neutral-800 rounded-lg p-8 border border-gray-200 dark:border-neutral-700 hover:shadow-lg transition-all duration-200 cursor-pointer max-w-md">
+                <div className="text-6xl mb-4">💬</div>
+                <h3 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
+                  Forum
+                </h3>
+                <p className="text-gray-600 dark:text-gray-400">
+                  Participe das discussões da comunidade crypto. Compartilhe estratégias, 
+                  arbitragens, sugestões e muito mais.
+                </p>
+              </div>
+            </Link>
           </div>
 
           {!isAuthenticated && (
@@ -113,9 +67,11 @@ export default function Home() {
               <p className="text-gray-600 dark:text-gray-400 mb-4">
                 Você está logado e pode participar de todas as discussões.
               </p>
-              <button className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-md font-medium transition-colors">
-                Criar Primeiro Post
-              </button>
+              <Link href="/forum">
+                <button className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-md font-medium transition-colors">
+                  Acessar Forum
+                </button>
+              </Link>
             </div>
           )}
         </div>
