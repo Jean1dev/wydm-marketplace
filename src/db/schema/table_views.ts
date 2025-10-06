@@ -1,4 +1,4 @@
-import { int, mysqlTable, mysqlEnum } from 'drizzle-orm/mysql-core';
+import { int, mysqlTable } from 'drizzle-orm/mysql-core';
 import { posts } from './posts';
 
 export const tableViews = mysqlTable('table_views', {

@@ -29,6 +29,6 @@ export async function incrementPostViews(request: IncrementPostViewsRequest): Pr
                 });
         }
 
-    } catch (error) {
+    } catch {
     }
 }
