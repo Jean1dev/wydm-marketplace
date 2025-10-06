@@ -15,8 +15,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "WYDM Marketplace",
-  description: "WYDM Marketplace",
+  title: "Comunidade Crypto",
+  description: "Comunidade Crypto",
 };
 
 export default function RootLayout({
