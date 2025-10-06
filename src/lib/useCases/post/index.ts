@@ -10,3 +10,5 @@ export { createInteraction } from './createInteraction';
 export type { CreateInteractionRequest, CreateInteractionResponse } from './createInteraction';
 export { updatePostDate } from './updatePostDate';
 export type { UpdatePostDateRequest, UpdatePostDateResponse } from './updatePostDate';
+export { incrementPostViews } from './incrementPostViews';
+export type { IncrementPostViewsRequest } from './incrementPostViews';

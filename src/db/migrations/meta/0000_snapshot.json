@@ -1,7 +1,7 @@
 {
   "version": "5",
   "dialect": "mysql",
-  "id": "9b8fee20-7c77-4735-9702-115251d02339",
+  "id": "8632ebd2-22ee-4028-a004-cc7f37c602a6",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "categories": {
@@ -274,6 +274,13 @@
           "notNull": false,
           "autoincrement": false
         },
+        "email_provedor_externo": {
+          "name": "email_provedor_externo",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
         "id_provedor_oauth": {
           "name": "id_provedor_oauth",
           "type": "varchar(255)",
@@ -398,6 +405,59 @@
       "compositePrimaryKeys": {
         "reputacao_id": {
           "name": "reputacao_id",
+          "columns": [
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraint": {}
+    },
+    "table_views": {
+      "name": "table_views",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "post_id": {
+          "name": "post_id",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "contador_views": {
+          "name": "contador_views",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": 0
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "table_views_post_id_posts_id_fk": {
+          "name": "table_views_post_id_posts_id_fk",
+          "tableFrom": "table_views",
+          "tableTo": "posts",
+          "columnsFrom": [
+            "post_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "table_views_id": {
+          "name": "table_views_id",
           "columns": [
             "id"
           ]

@@ -65,10 +65,11 @@ CREATE TABLE `reputacao` (
 	CONSTRAINT `reputacao_id` PRIMARY KEY(`id`)
 );
 --> statement-breakpoint
-INSERT INTO `categories` (`titulo`, `emoji`, `categoria_exclusiva_adms`) VALUES
-('Release Notes', '📝', true),
-('Estratégias', '🎯', false),
-('Arbitragens', '⚖️', false),
-('Sugestões de Melhorias', '💡', false),
-('Críticas', '🔍', false),
-('Lasque o Pau no Produto', '💥', false);
+CREATE TABLE `table_views` (
+	`id` int AUTO_INCREMENT NOT NULL,
+	`post_id` int NOT NULL,
+	`contador_views` int NOT NULL DEFAULT 0,
+	CONSTRAINT `table_views_id` PRIMARY KEY(`id`)
+);
+--> statement-breakpoint
+ALTER TABLE `table_views` ADD CONSTRAINT `table_views_post_id_posts_id_fk` FOREIGN KEY (`post_id`) REFERENCES `posts`(`id`) ON DELETE no action ON UPDATE no action;

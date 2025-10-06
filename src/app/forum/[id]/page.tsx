@@ -2,9 +2,11 @@
 
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
+import { useEffect, useRef } from 'react';
 import { usePost } from '@/hooks/usePost';
 import { useInteractions } from '@/hooks/useInteractions';
 import { useAuth } from '@/hooks/useAuth';
+import { usePostViews } from '@/hooks/usePostViews';
 import PostDetailLoading from './components/PostDetailLoading';
 import PostDetailError from './components/PostDetailError';
 import PostNotFound from './components/PostNotFound';
@@ -18,6 +20,15 @@ export default function PostDetail() {
   const { post, loading, error, refetch } = usePost(postId);
   const { interactions, loading: interactionsLoading, error: interactionsError, createInteraction, isCreating } = useInteractions(postId);
   const { isAuthenticated } = useAuth();
+  const { incrementViews } = usePostViews();
+  const hasIncrementedViews = useRef(false);
+
+  useEffect(() => {
+    if (post && postId && !hasIncrementedViews.current) {
+      hasIncrementedViews.current = true;
+      incrementViews(postId);
+    }
+  }, [post, postId]);
 
   const handleCreateComment = async (descricao: string) => {
     const result = await createInteraction(descricao);
