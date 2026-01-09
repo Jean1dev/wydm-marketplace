@@ -30,6 +30,12 @@ export default function PostDetail() {
     }
   }, [post, postId]);
 
+  useEffect(() => {
+    if (post?.titulo) {
+      document.title = post.titulo;
+    }
+  }, [post]);
+
   const handleCreateComment = async (descricao: string) => {
     const result = await createInteraction(descricao);
     
