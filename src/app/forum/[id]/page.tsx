@@ -87,6 +87,7 @@ export default function PostDetail() {
           <PostContent
             titulo={post.titulo}
             descricao={post.descricao}
+            autorId={post.autorId}
             autorNome={post.autorNome}
             autorAvatar={post.autorAvatar || undefined}
             dataCriacao={post.dataCriacao}
