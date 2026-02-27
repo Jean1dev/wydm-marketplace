@@ -124,48 +124,49 @@ export default function Forum() {
             {!loading && !error && (
               <div className="space-y-4">
                 {posts.map((post) => (
-                  <div key={post.id} className="bg-white dark:bg-neutral-800 rounded-lg border border-gray-200 dark:border-neutral-700 hover:shadow-md transition-shadow">
-                    <Link href={`/forum/${post.id}`} className="block p-6">
-                    <div className="flex items-start justify-between mb-3">
-                      <div className="flex items-center space-x-2">
-                        <span className="text-lg">
-                          {post.categoryEmoji || '📝'}
-                        </span>
-                        <span className="text-sm text-gray-500 dark:text-gray-400 font-medium">
-                          {post.categoryTitulo || 'Sem categoria'}
+                  <div key={post.id} className="bg-white dark:bg-neutral-800 rounded-lg border border-gray-200 dark:border-neutral-700 hover:shadow-md transition-shadow p-6">
+                    <Link href={`/forum/${post.id}`} className="block">
+                      <div className="flex items-start justify-between mb-3">
+                        <div className="flex items-center space-x-2">
+                          <span className="text-lg">
+                            {post.categoryEmoji || '📝'}
+                          </span>
+                          <span className="text-sm text-gray-500 dark:text-gray-400 font-medium">
+                            {post.categoryTitulo || 'Sem categoria'}
+                          </span>
+                        </div>
+                        <span className="text-sm text-gray-500 dark:text-gray-400">
+                          {formatDate(post.dataCriacao)}
                         </span>
                       </div>
-                      <span className="text-sm text-gray-500 dark:text-gray-400">
-                        {formatDate(post.dataCriacao)}
-                      </span>
-                    </div>
-                    
-                    <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-                      {post.titulo}
-                    </h3>
-                    
-                    <p className="text-gray-600 dark:text-gray-400 mb-4 line-clamp-2">
-                      {post.descricaoTruncada || post.descricao}
-                    </p>
-                    
+                      <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                        {post.titulo}
+                      </h3>
+                      <p className="text-gray-600 dark:text-gray-400 mb-4 line-clamp-2">
+                        {post.descricaoTruncada || post.descricao}
+                      </p>
+                    </Link>
                     <div className="flex items-center justify-between">
-                      <div className="flex items-center space-x-3 text-sm text-gray-500 dark:text-gray-400">
+                      <Link
+                        href={`/perfil/${post.autorId}`}
+                        onClick={(e) => e.stopPropagation()}
+                        className="flex items-center space-x-3 text-sm text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                      >
                         {post.autorAvatar ? (
                           <img
                             src={post.autorAvatar}
                             alt={post.autorNome}
-                            className="w-8 h-8 rounded-full object-cover"
+                            className="w-8 h-8 rounded-full object-cover ring-2 ring-transparent hover:ring-blue-400/50 transition-shadow"
                           />
                         ) : (
-                          <div className="w-8 h-8 rounded-full bg-gray-300 dark:bg-gray-600 flex items-center justify-center">
+                          <div className="w-8 h-8 rounded-full bg-gray-300 dark:bg-gray-600 flex items-center justify-center ring-2 ring-transparent hover:ring-blue-400/50 transition-shadow">
                             <span className="text-xs font-medium text-gray-600 dark:text-gray-300">
                               {post.autorNome.charAt(0).toUpperCase()}
                             </span>
                           </div>
                         )}
                         <span>Por: {post.autorNome}</span>
-                      </div>
-                      
+                      </Link>
                       <div className="flex items-center space-x-4 text-sm text-gray-500 dark:text-gray-400">
                         <div className="flex items-center space-x-1">
                           <span>📅</span>
@@ -173,7 +174,6 @@ export default function Forum() {
                         </div>
                       </div>
                     </div>
-                    </Link>
                   </div>
                 ))}
                 

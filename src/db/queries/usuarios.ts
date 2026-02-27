@@ -23,6 +23,15 @@ export interface UserRecord {
   whatsapp: string | null;
 }
 
+export async function findUserById(id: number): Promise<UserRecord | null> {
+  const user = await db
+    .select()
+    .from(usuarios)
+    .where(eq(usuarios.id, id))
+    .limit(1);
+  return user[0] || null;
+}
+
 export async function findUserByOAuthId(idProvedorOAuth: string): Promise<UserRecord | null> {
   const user = await db
     .select()

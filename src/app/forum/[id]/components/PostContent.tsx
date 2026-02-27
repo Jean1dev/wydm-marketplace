@@ -1,6 +1,9 @@
+import Link from 'next/link';
+
 interface PostContentProps {
   titulo: string;
   descricao: string;
+  autorId: number;
   autorNome: string;
   autorAvatar?: string;
   dataCriacao: string;
@@ -10,6 +13,7 @@ interface PostContentProps {
 export default function PostContent({ 
   titulo, 
   descricao, 
+  autorId,
   autorNome, 
   autorAvatar, 
   dataCriacao, 
@@ -40,15 +44,18 @@ export default function PostContent({
       
       <div className="border-t border-gray-200 dark:border-neutral-700 pt-6">
         <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-3">
+          <Link
+            href={`/perfil/${autorId}`}
+            className="flex items-center space-x-3 hover:opacity-90 transition-opacity"
+          >
             {autorAvatar ? (
               <img
                 src={autorAvatar}
                 alt={autorNome}
-                className="w-12 h-12 rounded-full object-cover"
+                className="w-12 h-12 rounded-full object-cover ring-2 ring-transparent hover:ring-blue-400/50 transition-shadow"
               />
             ) : (
-              <div className="w-12 h-12 rounded-full bg-gray-300 dark:bg-gray-600 flex items-center justify-center">
+              <div className="w-12 h-12 rounded-full bg-gray-300 dark:bg-gray-600 flex items-center justify-center ring-2 ring-transparent hover:ring-blue-400/50 transition-shadow">
                 <span className="text-lg font-medium text-gray-600 dark:text-gray-300">
                   {autorNome.charAt(0).toUpperCase()}
                 </span>
@@ -62,7 +69,7 @@ export default function PostContent({
                 Autor do post
               </div>
             </div>
-          </div>
+          </Link>
           
           <div className="text-right text-sm text-gray-500 dark:text-gray-400">
             <div className="flex items-center space-x-1 mb-1">

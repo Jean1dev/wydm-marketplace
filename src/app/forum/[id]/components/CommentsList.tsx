@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { InteractionData } from '@/lib/useCases/post';
 
 interface CommentsListProps {
@@ -54,30 +55,36 @@ export default function CommentsList({ interactions, loading, error }: CommentsL
       {interactions.map((interaction) => (
         <div key={interaction.id} className="border-l-4 border-blue-200 dark:border-blue-800 pl-4 py-2">
           <div className="flex items-start space-x-3">
-            {interaction.autorAvatar ? (
-              <img
-                src={interaction.autorAvatar}
-                alt={interaction.autorNome}
-                className="w-10 h-10 rounded-full object-cover flex-shrink-0"
-              />
-            ) : (
-              <div className="w-10 h-10 rounded-full bg-gray-300 dark:bg-gray-600 flex items-center justify-center flex-shrink-0">
-                <span className="text-sm font-medium text-gray-600 dark:text-gray-300">
-                  {interaction.autorNome.charAt(0).toUpperCase()}
-                </span>
-              </div>
-            )}
-            
+            <Link
+              href={`/perfil/${interaction.autorId}`}
+              className="flex-shrink-0 hover:opacity-90 transition-opacity"
+            >
+              {interaction.autorAvatar ? (
+                <img
+                  src={interaction.autorAvatar}
+                  alt={interaction.autorNome}
+                  className="w-10 h-10 rounded-full object-cover ring-2 ring-transparent hover:ring-blue-400/50 transition-shadow"
+                />
+              ) : (
+                <div className="w-10 h-10 rounded-full bg-gray-300 dark:bg-gray-600 flex items-center justify-center ring-2 ring-transparent hover:ring-blue-400/50 transition-shadow">
+                  <span className="text-sm font-medium text-gray-600 dark:text-gray-300">
+                    {interaction.autorNome.charAt(0).toUpperCase()}
+                  </span>
+                </div>
+              )}
+            </Link>
             <div className="flex-1 min-w-0">
               <div className="flex items-center space-x-2 mb-1">
-                <span className="font-medium text-gray-900 dark:text-gray-100">
+                <Link
+                  href={`/perfil/${interaction.autorId}`}
+                  className="font-medium text-gray-900 dark:text-gray-100 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                >
                   {interaction.autorNome}
-                </span>
+                </Link>
                 <span className="text-xs text-gray-500 dark:text-gray-400">
                   {formatDate(interaction.dataCriacao)}
                 </span>
               </div>
-              
               <div className="text-gray-700 dark:text-gray-300 text-sm leading-relaxed whitespace-pre-wrap">
                 {interaction.descricao}
               </div>
